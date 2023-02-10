@@ -34,6 +34,9 @@
       // 読み取りスタート
       async function startReading() {
         const video = document.createElement("video");
+        video.autoplay = true;
+        video.muted = true;
+        video.playsInline = true;
         const canvas = document.querySelector("#canvas");
         // カメラ起動
         stream = await navigator.mediaDevices.getUserMedia(constraints);
