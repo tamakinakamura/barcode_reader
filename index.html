@@ -79,6 +79,8 @@
 
       // 読み取り終了
       function stopReading() {
+        // キャンバスを隠す
+        document.getElementById("canvas").style.display = "none";
         // ボタン表示制御
         document.getElementById("btn_stop").style.display = "none";
         document.getElementById("btn_start").style.display = "unset";
@@ -138,7 +140,6 @@
               // 10回同じ内容だったら読み取り完了
               if (count >= 10) {
                 document.getElementById("code").value = data.codeResult.code;
-                document.getElementById("canvas").style.display = "none";
                 Quagga.stop();
                 stopReading();
               }
