@@ -48,7 +48,7 @@
         // ビデオ情報取得完了時
         video.onloadedmetadata = function (e) {
           video.play(); // ビデオ開始
-          timer = setInterval(function () {
+          timerId = setInterval(function () {
             canvas.width = video.videoWidth;
             canvas.height = video.videoHeight;
             var ctx = canvas.getContext("2d");
@@ -73,7 +73,6 @@
         // ストリームの解放
         clearInterval(timerId);
         stream.getTracks().forEach((track) => track.stop());
-        video.srcObject = null;
       }
 
       // コード読み取り処理
