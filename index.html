@@ -73,7 +73,6 @@
         // ストリームの解放
         clearInterval(timerId);
         stream.getTracks().forEach((track) => track.stop());
-        var video = document.querySelector("#video");
         video.srcObject = null;
       }
 
