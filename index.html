@@ -79,6 +79,7 @@
 
       // 読み取り終了
       function stopReading() {
+        Quagga.stop();
         // キャンバスを隠す
         document.getElementById("canvas").style.display = "none";
         // ボタン表示制御
@@ -123,7 +124,6 @@
             // エラーがあった場合
             if (err) {
               alert("エラーが発生しました");
-              Quagga.stop();
               stopReading();
               return;
             }
@@ -140,7 +140,6 @@
               // 10回同じ内容だったら読み取り完了
               if (count >= 10) {
                 document.getElementById("code").value = data.codeResult.code;
-                Quagga.stop();
                 stopReading();
               }
             });
