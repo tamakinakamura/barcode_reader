@@ -9,11 +9,20 @@
   <body>
     <input type="text" id="code" /><br />
     <button onClick="startReading()">読み取り開始</button><br />
-    <video id="video" style="display: none; width: 100vw"></video>
+    <canvas id="canvas"></canvas>
 
     <script>
       // カメラ起動用の設定値
-      const constraints = { audio: false, video: { width: 640, height: 480 } };
+      const constraints = {
+        audio: false,
+        video: {
+          facingMode: { exact: "environment" },
+          constraints: {
+            width: 640,
+            height: 480,
+          },
+        },
+      };
 
       // ビデオストリーム
       var stream;
@@ -24,16 +33,33 @@
 
       // 読み取りスタート
       async function startReading() {
+        const video = document.createElement("video");
+        const canvas = document.querySelector("#canvas");
         // カメラ起動
         stream = await navigator.mediaDevices.getUserMedia(constraints);
 
         // ストリーミング開始
-        var video = document.querySelector("#video");
         video.srcObject = stream;
 
         // ビデオ情報取得完了時
         video.onloadedmetadata = function (e) {
           video.play(); // ビデオ開始
+          setInterval(function () {
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            var ctx = canvas.getContext("2d");
+            ctx.drawImage(
+              video,
+              0,
+              0,
+              video.videoWidth,
+              video.videoHeight,
+              0,
+              0,
+              canvas.width,
+              canvas.height
+            );
+          }, 200);
           read(); // コード読み取り開始
         };
       }
