@@ -33,7 +33,7 @@
 
       // 読み取りスタート
       async function startReading() {
-        const video = document.createElement("video");
+        var video = document.createElement("video");
         video.autoplay = true;
         video.muted = true;
         video.playsInline = true;
@@ -73,6 +73,7 @@
         stream.getTracks().forEach((track) => track.stop());
         var video = document.querySelector("#video");
         video.srcObject = null;
+        video = null;
       }
 
       // コード読み取り処理
