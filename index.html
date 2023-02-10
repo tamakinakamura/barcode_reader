@@ -30,7 +30,7 @@
       // 読み取りコード
       var code;
       var count = 0;
-      var timer;
+      var timerId;
 
       // 読み取りスタート
       async function startReading() {
@@ -71,10 +71,10 @@
       // 読み取り終了
       function stopReading() {
         // ストリームの解放
+        clearInterval(timerId);
         stream.getTracks().forEach((track) => track.stop());
         var video = document.querySelector("#video");
         video.srcObject = null;
-        clearIntaval(timer);
       }
 
       // コード読み取り処理
