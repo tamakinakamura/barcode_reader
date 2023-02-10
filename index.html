@@ -30,6 +30,7 @@
       // 読み取りコード
       var code;
       var count = 0;
+      var timer;
 
       // 読み取りスタート
       async function startReading() {
@@ -47,7 +48,7 @@
         // ビデオ情報取得完了時
         video.onloadedmetadata = function (e) {
           video.play(); // ビデオ開始
-          setInterval(function () {
+          timer = setInterval(function () {
             canvas.width = video.videoWidth;
             canvas.height = video.videoHeight;
             var ctx = canvas.getContext("2d");
@@ -73,7 +74,7 @@
         stream.getTracks().forEach((track) => track.stop());
         var video = document.querySelector("#video");
         video.srcObject = null;
-        video = null;
+        clearIntaval(timer);
       }
 
       // コード読み取り処理
