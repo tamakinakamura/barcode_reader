@@ -8,7 +8,11 @@
   </head>
   <body>
     <input type="text" id="code" /><br />
-    <button onClick="startReading()">読み取り開始</button><br />
+    <button onClick="startReading()" id="btn_start">読み取り開始</button>
+    <button onClick="stopReading()" style="display: none" id="btn_stop">
+      読み取り終了
+    </button>
+    <br />
     <canvas id="canvas"></canvas>
 
     <script>
@@ -34,10 +38,15 @@
 
       // 読み取りスタート
       async function startReading() {
+        // ボタン表示制御
+        document.getElementById("btn_start").style.display = "none";
+        document.getElementById("btn_stop").style.display = "unset";
+        // ビデオの準備
         var video = document.createElement("video");
         video.autoplay = true;
         video.muted = true;
         video.playsInline = true;
+        // ビデオの内容を写すキャンバス
         const canvas = document.querySelector("#canvas");
         // カメラ起動
         stream = await navigator.mediaDevices.getUserMedia(constraints);
@@ -70,6 +79,9 @@
 
       // 読み取り終了
       function stopReading() {
+        // ボタン表示制御
+        document.getElementById("btn_stop").style.display = "none";
+        document.getElementById("btn_start").style.display = "unset";
         // ストリームの解放
         clearInterval(timerId);
         stream.getTracks().forEach((track) => track.stop());
