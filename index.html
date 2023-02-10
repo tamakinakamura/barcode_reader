@@ -81,7 +81,7 @@
         code = "";
 
         // カメラの画像を表示
-        document.getElementById("video").style.display = "block";
+        document.getElementById("canvas").style.display = "block";
 
         // バーコードリーダーイニシャル
         Quagga.init(
@@ -126,7 +126,7 @@
               // 10回同じ内容だったら読み取り完了
               if (count >= 10) {
                 document.getElementById("code").value = data.codeResult.code;
-                document.getElementById("video").style.display = "none";
+                document.getElementById("canvas").style.display = "none";
                 Quagga.stop();
                 stopReading();
               }
